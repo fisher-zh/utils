@@ -1,6 +1,7 @@
 /**
  * 验证统一社会信用代码
  * @param {number | string} credNum
+ * @return {boolean} 是否为统一社会信用代码
  */
 function isCreditCode(credNum) {
     var ret = false;
