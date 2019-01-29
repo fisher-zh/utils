@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>7/14</span>
+        <span class='fraction'>14/14</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">16.67% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>1/6</span>
+        <span class='fraction'>6/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>2/3</span>
+        <span class='fraction'>3/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>7/14</span>
+        <span class='fraction'>14/14</span>
       </div>
     </div>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -82,23 +82,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">5×</span>
 <span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -107,32 +96,43 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * 验证是否是空数组和空对象
  * @param {array | object} obj
  */
 function isEmpty(obj) {
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (obj instanceof Object) {
+    if (Object.prototype.toString.call(obj) === '[object Object]') {
         return isEmptyObj(obj)
-    } else <span class="cstat-no" title="statement not covered" >if (obj instanceof Array) {</span>
-<span class="cstat-no" title="statement not covered" >        return isEmptyArr(obj)</span>
+    } else if (Object.prototype.toString.call(obj) === '[object Array]') {
+        return isEmptyArr(obj)
     } else {
-<span class="cstat-no" title="statement not covered" >        return false</span>
+        return false
     }
 }
 /**
  * 是否是空数组
  * @param {arr} arr
  */
-<span class="fstat-no" title="function not covered" >function isEmptyArr(arr) {</span>
-<span class="cstat-no" title="statement not covered" >    if (arr.length === 0) {</span>
-<span class="cstat-no" title="statement not covered" >        return true</span>
+function isEmptyArr(arr) {
+    if (arr.length === 0) {
+        return true
     } else {
-<span class="cstat-no" title="statement not covered" >        return false</span>
+        return false
     }
 }
 /**
@@ -141,7 +141,7 @@ function isEmpty(obj) {
  */
 function isEmptyObj(obj) {
     for (var _ in obj) {
-<span class="cstat-no" title="statement not covered" >        return false</span>
+        return false
     }
     return true
 }
@@ -151,7 +151,7 @@ function isEmptyObj(obj) {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Jan 28 2019 18:10:20 GMT+0800 (中国标准时间)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Jan 29 2019 10:09:33 GMT+0800 (中国标准时间)
 </div>
 </div>
 <script src="../prettify.js"></script>

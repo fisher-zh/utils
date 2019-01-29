@@ -3,9 +3,9 @@
  * @param {array | object} obj
  */
 function isEmpty(obj) {
-    if (obj instanceof Object) {
+    if (Object.prototype.toString.call(obj) === '[object Object]') {
         return isEmptyObj(obj)
-    } else if (obj instanceof Array) {
+    } else if (Object.prototype.toString.call(obj) === '[object Array]') {
         return isEmptyArr(obj)
     } else {
         return false
