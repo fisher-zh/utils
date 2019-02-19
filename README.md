@@ -3,6 +3,16 @@
 > 该仓库收集了一些常用的工具和校验函数，现有列表中的函数单元测试覆盖率接近100%。
 
 ## 函数列表
+- curry(fn, currArgs)
+``` js
+/**
+ * 函数的柯里化
+ * @param {function} fn 需要柯里化的函数
+ * @param {any} currArgs 该参数可以为需要的定值，类型根据fn参数的类型来确定
+ * @return {function} 柯里化后的函数
+ */
+```
+
 - getParams(url, key)
 ``` js
 /**
