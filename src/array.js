@@ -1,7 +1,7 @@
 /**
  * 查找数组中的最大值
  * @param {array} array 目标数组
- * * @return {number} 最大值
+ * @return {number} 最大值
  */
 function arrayMax (array) {
     // 使用allay将Math.max挂载在null上执行数组，因为apply是传入一个数组参数的的

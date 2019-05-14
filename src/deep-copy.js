@@ -4,15 +4,26 @@
  * @return {object | array} 返回复制后的数据
  */
 function deepCopy (source, hash) {
-    // 声明要返回的对象或者数组
-    let target;
     const sourceType = type(source);
+    if (sourceType !== 'Object' && sourceType !== 'Array') {
+        return new Error('不支持的数据类型');
+    }
+    // 声明要返回的对象或者数组
+    let target = sourceType === 'Object' ? {} : [];
+    // 用哈希表保存对象值以防止循环引用
+    hash = hash || new WeakMap();
+    // 如果存在于哈希表中直接返回
+    if (hash.has(source)) {
+        return hash.get(source);
+    }
+    // 设置哈希值
+    hash.set(source, target);
+    
     // 判断源数据类型
     if (sourceType === 'Object') {
-        target = {};
         for (let key in source) {
             if (type(source[key]) === 'Object' || type(source[key]) === 'Array') {
-                target[key] = deepCopy(source[key]);
+                target[key] = deepCopy(source[key], hash);
             } else if (type(source[key]) === 'Function') {
                 const fnStr = source[key].toString();
                 // 这里加上 return 避免直接使用 new Function(fnStr) 报错
@@ -22,10 +33,12 @@ function deepCopy (source, hash) {
             }
         }
     } else if (sourceType === 'Array') {
-        target = [];
+        // 这里可以使用 for in 直接对数组和对象进行兼容，
+        // 但是数组使用 for in 会有一定的性能损耗
+        // 数据量上万后会有明显的差异
         for (let i = 0; i < source.length; i++) {
             if (type(source[i]) === 'Object' || type(source[i]) === 'Array') {
-                target[i] = deepCopy(source[i]);
+                target[i] = deepCopy(source[i], hash);
             } else if (type(source[i]) === 'Function') {
                 const fnStr = source[i].toString();
                 // 这里加上 return 避免直接使用 new Function(fnStr) 报错
@@ -35,7 +48,7 @@ function deepCopy (source, hash) {
             }
         }
     } else {
-        return new Error('不支持的数据类型');
+        // nothing to do
     }
     return target
 }
@@ -47,23 +60,3 @@ function deepCopy (source, hash) {
 function type (value) {
     return Object.prototype.toString.call(value).slice(8, -1)
 }
-
-const a = {
-    x: 123,
-    y: 34,
-    z: {
-        m: 1,
-        n: 2
-    },
-    arr: [1, 2, 3],
-    fn: function () {
-        console.log('123456')
-    },
-    fn2: () => {
-        console.log(777777777777)
-    }
-}
-a.a = a;
-
-const b = deepCopy(a);
-console.log(b);
